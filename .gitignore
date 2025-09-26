@@ -1,0 +1,5 @@
+*.class
+algorithms-1
+# IDE Specific
+.vscode/
+.idea/
