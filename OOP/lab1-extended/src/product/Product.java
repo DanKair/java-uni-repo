@@ -204,7 +204,7 @@ public class Product {
         System.out.println("ID: " + id);
         System.out.println("Name: " + name);
         System.out.println("Description: " + (description != null ? description : "No description"));
-        System.out.println("Price: $" + String.format("%.2f", price));
+        System.out.println("Price: $" + String.format("%.2f", price) + " USD");
         System.out.println("Quantity: " + quantity);
         System.out.println("Stock Status: " + getStockStatus());
         System.out.println("Total Value: $" + String.format("%.2f", calculateTotalValue()));

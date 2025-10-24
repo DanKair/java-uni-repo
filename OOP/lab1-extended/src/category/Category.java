@@ -111,7 +111,7 @@ public class Category {
         System.out.println("Name: " + name);
         System.out.println("Description: " + description);
         System.out.println("Number of products: " + products.size());
-        System.out.println("Total category value: $" + String.format("%.2f", getTotalValue()));
+        System.out.println("Total category value: $" + String.format("%.2f", getTotalValue()) + " USD");
         
         if (!products.isEmpty()) {
             System.out.println("\nProducts in this category:");

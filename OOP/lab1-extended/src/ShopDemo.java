@@ -16,19 +16,24 @@ public class ShopDemo {
         System.out.println("Created category: " + stationery.getName());
         
         // Create product
-        Product pen = new Product("PEN001", "Blue Ballpoint Pen", "Smooth writing pen", 2.50, 5, stationery);
+        Product pen = new Product("PEN001", "Red Ballpoint Pen", "Smooth writing pen", 2.50, 5, stationery);
         System.out.println("Created product: " + pen.getName());
         System.out.println("Initial stock status: " + pen.getStockStatus());
         System.out.println("Initial quantity: " + pen.getQuantity() + "\n");
+        // Empty Product
+        Product book = new Product();
+        System.out.println("Created product: " + book.getName());
+        System.out.println("Initial stock status: " + book.getStockStatus());
+        System.out.println("Initial quantity: " + book.getQuantity() + "\n");
         
         // === ACCEPTED OPERATIONS ===
         System.out.println("=== ACCEPTED OPERATIONS ===");
         
         // 1. Valid price update
-        System.out.print("Trying to set price to $250.00: ");
+        System.out.print("Trying to set price to $250.00 USD: ");
         boolean result = pen.trySetPrice(250.0);
         System.out.println(result ? "SUCCESS" : "FAILED");
-        System.out.println("Current price: $" + String.format("%.2f", pen.getPrice()) + "\n");
+        System.out.println("Current price: $" + String.format("%.2f", pen.getPrice()) + " USD" + "\n");
         
         // 2. Valid stock addition
         System.out.print("Adding 20 units to stock (current: " + pen.getQuantity() + "): ");
@@ -42,10 +47,10 @@ public class ShopDemo {
         
         // 1. Invalid price (negative)
         double oldPrice = pen.getPrice();
-        System.out.print("Trying to set price to -$1.00: ");
+        System.out.print("Trying to set price to -$1.00 USD: ");
         result = pen.trySetPrice(-1.0);
         System.out.println(result ? "SUCCESS" : "FAILED");
-        System.out.println("Price remained: $" + String.format("%.2f", pen.getPrice()));
+        System.out.println("Price remained: $" + String.format("%.2f", pen.getPrice()) + " USD");
         System.out.println("Price unchanged: " + (pen.getPrice() == oldPrice) + "\n");
         
         // 2. Invalid name (too short)
@@ -69,7 +74,7 @@ public class ShopDemo {
         System.out.print("Trying to apply 200% discount: ");
         result = pen.applyDiscount(200);
         System.out.println(result ? "SUCCESS" : "FAILED");
-        System.out.println("Price remained: $" + String.format("%.2f", pen.getPrice()));
+        System.out.println("Price remained: $" + String.format("%.2f", pen.getPrice()) + " USD");
         System.out.println("Price unchanged: " + (pen.getPrice() == oldPriceForDiscount) + "\n");
         
         // === STOCK STATUS DEMONSTRATION ===
