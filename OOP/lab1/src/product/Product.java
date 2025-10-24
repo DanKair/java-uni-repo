@@ -13,11 +13,12 @@ public class Product {
     public double price;
     public int quantity;
     public Category category;
-    public String[] stockStatuses = {"Out of Stock", "Low", "High"};
+    public String[] stockStatuses = {"Out of Stock", "Low", "Medium", "High"};
     public String stockStatus;
     
     // Default constructor (like Python's __init__ with no args)
     public Product() {
+        this.name = "None";
         this.quantity = 0;
         this.price = 0.0;
         this.stockStatus = stockStatuses[0];
@@ -32,6 +33,7 @@ public class Product {
         this.quantity = quantity;
         this.category = category;
          // Calculate initial stock status
+        updateStockStatus();
     }
     
     // Basic getters (similar to Python @property decorators)
@@ -67,9 +69,9 @@ public class Product {
     public void addStock(int amount) {
         // Basic validation (minimal for Task 1)
         if (amount > 0) {
-            quantity += amount;
-            
-            System.out.println("Added " + amount + " units. New quantity: " + quantity);
+            this.quantity += amount;
+            updateStockStatus();
+            System.out.println("Added " + amount + " units. New quantity: " + this.quantity);
         } else {
             System.out.println("Cannot add negative or zero stock.");
         }
@@ -84,13 +86,15 @@ public class Product {
             System.out.println("Cannot sell negative or zero quantity.");
         }
         
-        if (amount > quantity) {
+        else if (amount > this.quantity) {
             System.out.println("Insufficient stock. Available: " + quantity + ", Requested: " + amount);
         }
+        else {
+            this.quantity -= amount;
+            updateStockStatus();
+            System.out.println("Sold " + amount + " units. Remaining quantity: " + this.quantity);
+        }
         
-        quantity -= amount;
-        
-        System.out.println("Sold " + amount + " units. Remaining quantity: " + quantity);
     }
     
     /**
@@ -111,6 +115,18 @@ public class Product {
         System.out.println("Price changed from $" + oldPrice + 
                           " to $" + price);
     }
+
+    public void applyDiscountByTotalValue(){
+        if (this.calculateTotalValue() >= 25_000){
+            applyDiscount(80);
+        }
+        else if (this.calculateTotalValue() >= 10_000){
+            applyDiscount(50);
+        }
+        else if (this.calculateTotalValue() >= 5_000){
+            applyDiscount(25);
+        }
+    }
     
     /**
      * Calculate total value of inventory (price * quantity)
@@ -119,6 +135,24 @@ public class Product {
     public double calculateTotalValue() {
         return price * quantity;
     }
+
+    public void updateStockStatus(){
+        if (this.quantity == 0){
+            this.stockStatus = stockStatuses[0];
+        }
+
+        else if (this.quantity <= 10){
+            this.stockStatus = stockStatuses[1];
+        }
+
+        else if (this.quantity <= 25){
+            this.stockStatus = stockStatuses[2];
+        }
+        else{
+            this.stockStatus = stockStatuses[3];
+        }
+    }
+
     
     /**
      * Display detailed product information

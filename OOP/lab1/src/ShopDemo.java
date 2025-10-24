@@ -52,6 +52,7 @@ public class ShopDemo {
         laptop.sellProduct(2);
         laptop.sellProduct(10); // Should show insufficient stock message
         laptop.sellProduct(-1); // Should show error message
+        System.out.println("Laptop Quantity: " + laptop.quantity);
         System.out.println();
         
         // Show stock status changes
