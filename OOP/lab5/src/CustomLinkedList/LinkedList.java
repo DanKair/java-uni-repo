@@ -33,7 +33,9 @@ public class LinkedList<T> {
     // Add new Node to the start
     public void addToHead(T data){
         Node<T> newNode = new Node<>(data);
+        // Newly created Node now points to previous head
         newNode.next = head;
+        // Newly created Node becomes Head
         head = newNode;
         size++;
     }
@@ -60,7 +62,8 @@ public class LinkedList<T> {
 
         // If the head gonna be deleted, then move head to next element
         if (head.data == value){
-            head.next = head;
+            // Head becomes next element after head
+            head = head.next;
             return;
 
         }
@@ -69,11 +72,32 @@ public class LinkedList<T> {
             while (node.next != null){
             if (node.next.data == value){
                 node.next = node.next.next;
+                break; // Added this to break after first occurence of value assuming List stores unique elements
             }
             node = node.next;
         }
         }
+        size--;
 
+    }
+
+    public void deleteByPosition(int index){
+        // 1. Iterate till the index range starting from the head
+        // 2. Change the pointer of current Node to next Node
+        // TODO: Add Index Out of Range / NullPointerException handling
+        checkBounds(index);
+        Node <T> node = head;
+
+        // If index points to head, then make next element after head as new Head
+        if (index == 0){
+            head = head.next;
+        }
+
+        // Why index - 1? Because you need to shift the pointer of previous Node before target Node to the pointer of Target Node
+        for (int i = 0; i < index - 1; i++) {
+            node = node.next;
+        }
+        node.next = node.next.next;
     }
 
      // Get element at index
@@ -119,6 +143,10 @@ public class LinkedList<T> {
             index += 1;
         }
         */
+
+        if (head.data == value){
+            return index; // returns 0 index
+        }
 
         while (node.next != null){
             index += 1;

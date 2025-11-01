@@ -6,10 +6,13 @@ public class Main {
         Node firstNode = new Node<>(5);
         Node secondNode = new Node<>(10);
         Node thirdNode = new Node<>(20);
+        Node forthNode = new Node<>(50);
         firstNode.next = secondNode;
         //firstNode.next.next = thirdNode;
         secondNode.next = thirdNode;
-        System.out.println(firstNode);
+        thirdNode.next = forthNode;
+        System.out.println("Node class Demo: " + firstNode);
+        System.out.println("===============================");
 
         // LinkedList class Implementation Logic
         LinkedList linkedList = new LinkedList();
@@ -23,8 +26,12 @@ public class Main {
         linkedList.add(thirdNode.data);
         System.out.println(linkedList.getTail());
 
+        linkedList.add(forthNode.data);
+        System.out.println(linkedList.getTail());
+
         linkedList.addToTail(40);
         System.out.println(linkedList.getTail());
+        System.out.println("===============================");
 
         //linkedList.addToHead(50);
         linkedList.printList();
@@ -32,7 +39,12 @@ public class Main {
         //System.out.println("Element At the position 3: " + linkedList.getByIndex(3));
 
         linkedList.remove(20);
-        // linkedList.remove(5); // TODO: Handle Deleting of the Head Node
+        linkedList.printList();
+
+        linkedList.remove(5);
+        linkedList.printList();
+
+        linkedList.deleteByPosition(3);
         linkedList.printList();
     }
 }
