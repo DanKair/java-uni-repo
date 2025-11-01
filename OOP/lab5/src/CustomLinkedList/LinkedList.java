@@ -42,9 +42,10 @@ public class LinkedList<T> {
 
     // Add new Node at the end
     public void addToTail(T data){
+        // TODO: Fix tail overwriting issue
         Node<T> newNode = new Node<>(data);
 
-        // If tail references to null, then it's empty, so newNode becomes head
+        // If tail references to null, then it's empty, so newNode becomes tail
         if (tail == null){
             tail = newNode;
         }
@@ -64,6 +65,7 @@ public class LinkedList<T> {
         if (head.data == value){
             // Head becomes next element after head
             head = head.next;
+            size--;
             return;
 
         }
@@ -75,9 +77,9 @@ public class LinkedList<T> {
                 break; // Added this to break after first occurence of value assuming List stores unique elements
             }
             node = node.next;
+            size--;
         }
         }
-        size--;
 
     }
 
@@ -91,6 +93,8 @@ public class LinkedList<T> {
         // If index points to head, then make next element after head as new Head
         if (index == 0){
             head = head.next;
+            size--;
+            return; // exits execution of the method
         }
 
         // Why index - 1? Because you need to shift the pointer of previous Node before target Node to the pointer of Target Node
@@ -98,6 +102,7 @@ public class LinkedList<T> {
             node = node.next;
         }
         node.next = node.next.next;
+        size--;
     }
 
      // Get element at index
@@ -161,11 +166,6 @@ public class LinkedList<T> {
 
     }
 
-    // Size of the list
-    public int size() {
-        return size;
-    }
-
     // Check index bounds
     private void checkBounds(int index) {
         if (index < 0 || index >= size) {
@@ -176,6 +176,11 @@ public class LinkedList<T> {
     // Getter Methods
     public Node<T> getTail(){
         return tail;
+    }
+
+    // Size of the list
+    public int size() {
+        return size;
     }
 
     public void printList(){
