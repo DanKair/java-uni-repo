@@ -51,5 +51,15 @@ public class Main {
         linkedList.printList();
         System.out.println("Size of the Linked List: " + linkedList.size());
         System.out.println("Tail of the Linked List: " + linkedList.getTail());
+
+        // Reversing LinkedList using Extra Space (Creating New LinkedList)
+        // 0. Create a new LinkedList
+        // 1. Iterate from Tail to head in Original LinkedList (node = tail)
+        //      a. Get the Original LinkedList size
+        //      b. for (int i = size; i > 0; i--)
+        // 2. Add each Node from Original LinkedList to New LinkedList
+
+
+
     }
 }

@@ -22,7 +22,7 @@ public class Rectangle extends Figure{
     }
 
     public void setHeight(int height){
-        if (width > 0){
+        if (height > 0){
             this.height = height;
         }
         else{

@@ -204,6 +204,43 @@ public class LinkedList<T> {
 
     }
 
+    /*
+    public void printReverseList(){
+        // Iterate from Tail to head in Original LinkedList (node = tail)
+        //      a. Get the Original LinkedList size
+        //      b. for (int i = size; i > 0; i--)
+        Node <T> current = getTail();
+        while (current != head){
+            System.out.println(current.data);
+
+            if (current.next != head){
+                System.out.print(" --> ");
+            }
+            current = current.next;
+        }
+        System.out.println();
 
 
+    }
+     */
+
+    public void reverseList(){
+        // Reverse LinkedList using 3 pointers (prev, current, next)
+        // 1. Initalize prev as null, current as head, and next = current.next
+        // 2. Iterate till the tail
+        // 3. After each iteration, change the pointer of current to prev (current.next = prev)
+
+        Node<T> prev = null;
+        Node<T> current = head;
+        while (current != null){
+            // Creating 3 pointer variable next
+            Node<T> next = current.next;
+            // Reversing Pointing of current Node (<--) to previous Node
+            current.next = prev;
+            // Moving previous to right (by making it current Node)
+            prev = current;
+            // Moving current to right (by making it as next)
+            current = next;
+        }
+    }
 }
