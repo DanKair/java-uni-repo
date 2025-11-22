@@ -1,16 +1,25 @@
 package BankTransactionSystem;
 
 public class Transaction implements Runnable{
-    private final BankAccount account;
-    private final String clientName;
-    private final String operation; // "deposit" or "withdraw"
-    private final double amount;
+    private BankAccount account;
+    private String clientName;
+    private String operation; // "deposit" or "withdraw"
+    private double amount;
+    // private Currency currency;
 
-    public Transaction(BankAccount account, String clientName, String operation, double amount) {
+    // Default Constructor
+    public Transaction(){
+        this.amount = 0;
+        // this.currency = Currency.KZT;
+    }
+
+    // Parametrized Constructor
+    public Transaction(BankAccount account, String clientName, String operation, double amount, Currency currency) {
         this.account = account;
         this.clientName = clientName;
         this.operation = operation.toLowerCase();
         this.amount = amount;
+        // this.currency = currency;
     }
 
     @Override
