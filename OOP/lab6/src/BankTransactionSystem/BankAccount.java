@@ -5,11 +5,23 @@ public class BankAccount {
     private Currency currency;
 
     // Constructor with validation
-    public BankAccount(double initialBalance) {
+    public BankAccount(double initialBalance, Currency currency) {
         if (initialBalance < 0) {
             throw new IllegalArgumentException("Initial balance cannot be negative");
         }
         this.balance = initialBalance;
+        this.currency = currency;
+    }
+
+    // Default Constructor
+    public BankAccount(){
+        this.balance = 0;
+        this.currency = Currency.USD;
+    }
+
+    public BankAccount(double initialBalance){
+        this.balance = initialBalance;
+        this.currency = Currency.USD;
     }
 
     // Synchronized Methods to avoid Dead Lock by ensuring only one thread accessing a method at a time
@@ -39,6 +51,7 @@ public class BankAccount {
         this.balance -= amount;
     }
 
+    // Synchronized Getter methods
     public double getBalance() {
         // Synchronizing only code inside "synchronized" block
         synchronized (this) {
@@ -46,12 +59,18 @@ public class BankAccount {
         }
     }
 
+    public Currency getCurrency() {
+        synchronized (this) {
+            return this.currency;
+        }
+    }
+
     public synchronized boolean canOpenSaveAccount() {
-        // Condition for Opening Save Account in KZT
+        // Condition for Opening Save Account in Currency.KZT
         if (this.currency.equals(Currency.KZT) && getBalance() >= 50_000) {
             return true;
         }
-        // Condition for Opening Save Account in RUB
+        // Condition for Opening Save Account in Currency.RUB
         else if (this.currency.equals(Currency.RUB) && getBalance() >= 10_000) {
             return true;
         }
@@ -66,7 +85,7 @@ public class BankAccount {
 
     // Logic for Currency Exchange:
     // 1. Create currencyFromExchange and currencyToExchange variables
-    // 2. If currencyFromExchange == KZT and currencyToExchange == RUB and (this.balance / 6) > 0: this.balance /= 6
+    // 2. If currencyFromExchange == Currency.KZT and currencyToExchange == Currency.RUB and (this.balance / 6) > 0: this.balance /= 6
 
     public synchronized void currencyExchange(Currency from, Currency to) {
 
@@ -81,11 +100,30 @@ public class BankAccount {
         // Example exchange rates
         double rate = 0;
 
-        if (from == Currency.KZT && to == Currency.RUB) rate = 1.0 / 6;
-        else if (from == Currency.KZT && to == Currency.USD) rate = 1.0 / 520;
-        else if (from == Currency.KZT && to == Currency.EURO) rate = 1.0 / 600;
-        else
+        // Currency.KZT →
+        if (from == Currency.KZT && to == Currency.RUB)  rate = 1.0 / 6;
+        if (from == Currency.KZT && to == Currency.USD)  rate = 1.0 / 520;
+        if (from == Currency.KZT && to == Currency.EURO) rate = 1.0 / 600;
+
+        // Currency.USD →
+        if (from == Currency.USD && to == Currency.KZT)  rate = 520;
+        if (from == Currency.USD && to == Currency.RUB)  rate = 80;
+        if (from == Currency.USD && to == Currency.EURO) rate = 0.87;
+
+        // Currency.RUB →
+        if (from == Currency.RUB && to == Currency.KZT)  rate = 6;
+        if (from == Currency.RUB && to == Currency.USD)  rate = 1.0 / 80;
+        if (from == Currency.RUB && to == Currency.EURO) rate = 1.0 / 90;
+
+        // Currency.EURO →
+        if (from == Currency.EURO && to == Currency.KZT) rate = 600;
+        if (from == Currency.EURO && to == Currency.USD) rate = 1.15;
+        if (from == Currency.EURO && to == Currency.RUB) rate = 90;
+
+        // Any unsupported currency would case this exception
+        if (rate == 0) {
             throw new IllegalArgumentException("Unsupported exchange pair");
+        }
 
         // Perform conversion
         this.balance = this.balance * rate;
