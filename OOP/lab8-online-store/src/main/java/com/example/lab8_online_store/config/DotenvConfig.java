@@ -10,13 +10,9 @@ public class DotenvConfig {
                 .ignoreIfMissing()
                 .load();
 
-        dotenv.entries().forEach(e ->
-                System.setProperty(e.getKey(), e.getValue())
-        );
-
+        dotenv.entries().forEach(e -> {
+            System.setProperty(e.getKey(), e.getValue());
+        });
     }
-
-
-
 }
 

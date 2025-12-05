@@ -1,0 +1,19 @@
+CREATE TABLE products (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    quantity INTEGER NOT NULL CHECK (quantity >= 0),
+    description VARCHAR(1000) NOT NULL,
+    price NUMERIC(10,2) NOT NULL CHECK (price > 0),
+    category VARCHAR(50) NOT NULL,
+    brand VARCHAR(50)
+);
+
+INSERT INTO products (name, quantity, description, price, category, brand) VALUES
+('MacBook Pro 16', 15, 'Powerful laptop with M3 Pro chip, 16GB RAM, 512GB SSD.', 2499.99, 'Laptop', 'Apple'),
+('iPhone 15 Pro', 25, 'Latest iPhone with A17 Pro chip, 256GB storage.', 1199.99, 'Phone', 'Apple'),
+('Samsung Galaxy S24 Ultra', 20, 'Premium Android phone with S Pen and 200MP camera.', 1299.99, 'Phone', 'Samsung'),
+('iPad Air 11', 30, 'Lightweight tablet with M2 chip.', 599.99, 'Tablet', 'Apple'),
+('Dell XPS 15', 10, 'Windows laptop with Intel i7, 16GB RAM, RTX 4050.', 1899.99, 'Laptop', 'Dell'),
+('AirPods Pro', 50, 'Noise cancellation wireless earbuds.', 249.99, 'Audio', 'Apple'),
+('Sony WH-1000XM5', 35, 'Noise canceling headphones with great sound quality.', 399.99, 'Audio', 'Sony'),
+('Samsung Galaxy Tab S9', 18, 'Premium Android tablet with S Pen.', 799.99, 'Tablet', 'Samsung');
