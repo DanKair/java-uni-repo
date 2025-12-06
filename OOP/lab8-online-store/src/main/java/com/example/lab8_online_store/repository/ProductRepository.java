@@ -3,6 +3,7 @@ package com.example.lab8_online_store.repository;
 import com.example.lab8_online_store.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 // Repository layer in MVC is ONLY for DB interaction
@@ -21,7 +22,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByNameContainingIgnoreCase(String name);
 
     // Find Products by price
-    List<Product> findByPrice(Long price);
+    List<Product> findByPrice(BigDecimal price);
 
     /**
      * Find products by price range
@@ -31,7 +32,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * @param maxPrice Maximum price
      * @return List of products in price range
      */
-    List<Product> findByPriceBetween(Long minPrice, Long maxPrice);
+    List<Product> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
 
     // Find Products by brand
     List<Product> findByBrand(String brand);

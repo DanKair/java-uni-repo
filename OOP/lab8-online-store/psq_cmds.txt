@@ -1,19 +1,88 @@
+-- ============================================
+-- DROP OLD TABLE
+-- ============================================
+DROP TABLE IF EXISTS products CASCADE;
+
+-- ============================================
+-- CREATE NEW TABLE (matches Product entity)
+-- ============================================
 CREATE TABLE products (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    quantity INTEGER NOT NULL CHECK (quantity >= 0),
-    description VARCHAR(1000) NOT NULL,
-    price NUMERIC(10,2) NOT NULL CHECK (price > 0),
-    category VARCHAR(50) NOT NULL,
-    brand VARCHAR(50)
+    id          BIGSERIAL PRIMARY KEY,
+    name        VARCHAR(100) NOT NULL,
+    price       NUMERIC(10,2) NOT NULL CHECK (price > 0),
+    quantity    INTEGER NOT NULL CHECK (quantity >= 0),
+    brand       VARCHAR(50),
+    category    VARCHAR(50) NOT NULL,
+    description VARCHAR(1000),
+    image       TEXT
 );
 
-INSERT INTO products (name, quantity, description, price, category, brand) VALUES
-('MacBook Pro 16', 15, 'Powerful laptop with M3 Pro chip, 16GB RAM, 512GB SSD.', 2499.99, 'Laptop', 'Apple'),
-('iPhone 15 Pro', 25, 'Latest iPhone with A17 Pro chip, 256GB storage.', 1199.99, 'Phone', 'Apple'),
-('Samsung Galaxy S24 Ultra', 20, 'Premium Android phone with S Pen and 200MP camera.', 1299.99, 'Phone', 'Samsung'),
-('iPad Air 11', 30, 'Lightweight tablet with M2 chip.', 599.99, 'Tablet', 'Apple'),
-('Dell XPS 15', 10, 'Windows laptop with Intel i7, 16GB RAM, RTX 4050.', 1899.99, 'Laptop', 'Dell'),
-('AirPods Pro', 50, 'Noise cancellation wireless earbuds.', 249.99, 'Audio', 'Apple'),
-('Sony WH-1000XM5', 35, 'Noise canceling headphones with great sound quality.', 399.99, 'Audio', 'Sony'),
-('Samsung Galaxy Tab S9', 18, 'Premium Android tablet with S Pen.', 799.99, 'Tablet', 'Samsung');
+-- ============================================
+-- INSERT INITIAL DATA (8 existing + 7 new)
+-- ============================================
+
+INSERT INTO products (name, price, quantity, brand, category, description, image) VALUES
+-- ORIGINAL 8 PRODUCTS
+('MacBook Pro 16',        2499.99, 15, 'Apple', 'Laptop',
+ 'Powerful laptop with M3 Pro chip, 16GB RAM, 512GB SSD.',
+ 'https://example.com/images/macbook-pro-16.jpg'),
+
+('iPhone 15 Pro',          1199.99, 25, 'Apple', 'Phone',
+ 'Latest iPhone with A17 Pro chip, 256GB storage.',
+ 'https://example.com/images/iphone15pro.jpg'),
+
+('Samsung Galaxy S24 Ultra', 1299.99, 20, 'Samsung', 'Phone',
+ 'Premium Android phone with S Pen and 200MP camera.',
+ 'https://example.com/images/s24-ultra.jpg'),
+
+('iPad Air 11',             599.99, 30, 'Apple', 'Tablet',
+ 'Lightweight tablet with M2 chip.',
+ 'https://example.com/images/ipad-air-11.jpg'),
+
+('Dell XPS 15',             1899.99, 10, 'Dell', 'Laptop',
+ 'Windows laptop with Intel i7, 16GB RAM, RTX 4050.',
+ 'https://example.com/images/dell-xps-15.jpg'),
+
+('AirPods Pro',             249.99, 50, 'Apple', 'Audio',
+ 'Noise cancellation wireless earbuds.',
+ 'https://example.com/images/airpods-pro.jpg'),
+
+('Sony WH-1000XM5',         399.99, 35, 'Sony', 'Audio',
+ 'Noise canceling headphones with great sound quality.',
+ 'https://example.com/images/sony-xm5.jpg'),
+
+('Samsung Galaxy Tab S9',   799.99, 18, 'Samsung', 'Tablet',
+ 'Premium Android tablet with S Pen.',
+ 'https://example.com/images/galaxy-tab-s9.jpg'),
+
+
+-- ============================================
+-- 7 NEW PRODUCTS (you asked for 7 more rows)
+-- ============================================
+('Lenovo Legion 7',         2199.99, 12, 'Lenovo', 'Laptop',
+ 'High-performance gaming laptop with RTX 4080.',
+ 'https://example.com/images/legion7.jpg'),
+
+('Google Pixel 9 Pro',      1099.99, 22, 'Google', 'Phone',
+ 'Google flagship with advanced AI camera features.',
+ 'https://example.com/images/pixel9pro.jpg'),
+
+('Apple Watch Series 10',    499.99, 40, 'Apple', 'Wearable',
+ 'Latest smartwatch with health tracking.',
+ 'https://example.com/images/apple-watch-10.jpg'),
+
+('Sony PlayStation 5 Slim',  499.99, 28, 'Sony', 'Gaming',
+ 'Slim version of PS5 with improved cooling.',
+ 'https://example.com/images/ps5slim.jpg'),
+
+('Xbox Series X',            499.99, 25, 'Microsoft', 'Gaming',
+ 'Powerful next-gen gaming console.',
+ 'https://example.com/images/xbox-series-x.jpg'),
+
+('Samsung Odyssey G9',      1499.99, 8, 'Samsung', 'Monitor',
+ '49-inch ultrawide gaming monitor.',
+ 'https://example.com/images/odyssey-g9.jpg'),
+
+('Logitech MX Master 4',     149.99, 60, 'Logitech', 'Accessories',
+ 'Advanced productivity mouse with ergonomic design.',
+ 'https://example.com/images/mx-master-4.jpg');

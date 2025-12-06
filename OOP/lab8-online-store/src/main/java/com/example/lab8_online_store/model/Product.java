@@ -26,16 +26,15 @@ public class Product {
     private String brand;
     private String category;
     private String description; // should be optional field
-    // private String image; // URL of File path to image
+    private String image; // URL of File path to image
 
     public Product(){
 
     }
 
     // Parametrized Constructor
-    public Product(Long id, String name, BigDecimal price, Integer quantity, String brand,
-                   String category, String description)
-    {
+    public Product(Long id, String name, BigDecimal price, Integer quantity,
+                   String brand, String category, String description, String image) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -43,6 +42,7 @@ public class Product {
         this.brand = brand;
         this.category = category;
         this.description = description;
+        this.image = image;
     }
 
     // Step 4: Getters and Setters (required for JSON serialization/deserialization)
@@ -103,17 +103,22 @@ public class Product {
         this.brand = brand;
     }
 
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
+
     // Step 5: toString method for debugging
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", quantity=" + quantity +
-                ", description='" + description + '\'' +
                 ", price=" + price +
-                ", category='" + category + '\'' +
+                ", quantity=" + quantity +
                 ", brand='" + brand + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 
